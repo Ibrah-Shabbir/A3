@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/menu_bar"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar2"
+        android:layout_above="@id/navigation">
+
+        <LinearLayout
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="250dp"
+            android:background="#838181">
+
+            <ImageView
+                    android:id="@+id/product_detail_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/prod"
+                    android:layout_marginTop="0dp"/>
+        </LinearLayout>
+        <ScrollView
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/product_detail_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+                android:textColor="@color/black_color"
+                android:textSize="24dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/product_detail_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description: "
+                android:layout_marginTop="@dimen/margin_4" />
+            <TextView
+                android:id="@+id/product_detail_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quantity: "
+                android:layout_marginTop="@dimen/margin_4" />
+            <TextView
+                android:id="@+id/product_detail_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pirce: Rs "
+                android:layout_marginTop="@dimen/margin_4"/>
+            <TextView
+                android:id="@+id/product_detail_contactNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact#: "
+                android:layout_marginTop="@dimen/margin_4"/>
+        </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/action_bar_color"
+        app:itemBackground="@color/action_bar_color"
+        android:foreground="?attr/selectableItemBackground"
+        app:itemIconTint="@color/white_color"
+        app:itemTextColor="@color/white_color"
+        app:menu="@menu/navigation"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

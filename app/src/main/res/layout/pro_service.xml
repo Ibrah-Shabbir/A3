@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/app_bar"/>
+
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/send_product"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="134dp"
+        android:onClick="sendMessage"
+        android:text="Product" />
+    <Button
+        android:id="@+id/send_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:text="Service" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/action_bar_color"
+        app:itemBackground="@color/action_bar_color"
+        android:foreground="?attr/selectableItemBackground"
+        app:itemIconTint="@color/white_color"
+        app:itemTextColor="@color/white_color"
+        app:menu="@menu/navigation"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>
