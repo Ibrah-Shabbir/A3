@@ -11,6 +11,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "OXP_DATABASE.db";    // Database Name
     public static final String TABLE_USER = "User";          //Table Name
     public static final String TABLE_PRODUCT = "Product";// Table Name
+    public static final String TABLE_SERVICE = "Service";
     public static final String TABLE_IMAGE = "Image";// Table Name
     private static final int DATABASE_Version = 1;
 
@@ -43,6 +44,13 @@ public class MyDatabase extends SQLiteOpenHelper {
     public static final String IMAGE_NAME ="name";
     public static final String IMAGE_IMAGE = "image";
 
+    /////////////SERVICE/////////////////////////
+    public static final String SERVICE_ID = "id";
+    public static final String SERVICE_NAME = "name";
+    public static final String SERVICE_DESCRIPTION = "description";
+    public static final String SERVICE_FK_EMAIL = "user_email";
+
+
     ////////CREATE TABLE OF USER ///////////////
 
     private static final String CREATE_USER_TABLE ="CREATE TABLE "
@@ -71,6 +79,17 @@ public class MyDatabase extends SQLiteOpenHelper {
             + PRODUCT_IMAGE+" TEXT,"
             + "FOREIGN KEY ("+PRODUCT_FK_EMAIL+") REFERENCES "+TABLE_USER+" ("+USER_ID+") );";
 
+    /////////////CREATE TABLE OF SERVICE//////////////////
+
+
+    private static final String CREATE_SERVICE_TABLE= "CREATE TABLE "
+            + TABLE_SERVICE + "(" + SERVICE_ID
+            + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + SERVICE_FK_EMAIL+" TEXT,"
+            + SERVICE_NAME+" TEXT,"
+            + SERVICE_DESCRIPTION+" TEXT,"
+            + "FOREIGN KEY ("+SERVICE_FK_EMAIL+") REFERENCES "+TABLE_USER+" ("+USER_ID+") );";
+
     /////////////CREATE TABLE OF IMAGE//////////////////
     private static final String CREATE_IMAGE_TABLE= "CREATE TABLE "
             + TABLE_IMAGE +"("
@@ -83,6 +102,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     private static final String DROP_USER_TABLE ="DROP TABLE IF EXISTS "+TABLE_USER;
     private static final String DROP_PRODUCT_TABLE ="DROP TABLE IF EXISTS "+TABLE_PRODUCT;
+    private static final String DROP_SERVICE_TABLE ="DROP TABLE IF EXISTS "+TABLE_SERVICE;
     private static final String DROP_IMAGE_TABLE ="DROP TABLE IF EXISTS "+TABLE_IMAGE;
     private Context context;
 
@@ -98,6 +118,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_PRODUCT_TABLE);
+        db.execSQL(CREATE_SERVICE_TABLE);
         //db.execSQL(CREATE_IMAGE_TABLE);
 
 
@@ -108,6 +129,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         db.execSQL(DROP_USER_TABLE);
         db.execSQL(DROP_PRODUCT_TABLE);
+        db.execSQL(DROP_SERVICE_TABLE);
         //db.execSQL(DROP_IMAGE_TABLE);
         onCreate(db);
 
