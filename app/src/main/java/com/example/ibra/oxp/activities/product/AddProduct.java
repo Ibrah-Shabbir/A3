@@ -44,6 +44,7 @@ import com.example.ibra.oxp.activities.SignUp;
 import com.example.ibra.oxp.activities.myAccount.ViewMyProducts;
 import com.example.ibra.oxp.database.MyDatabaseHelper;
 import com.example.ibra.oxp.models.MyProduct;
+import com.example.ibra.oxp.utils.DialogBuilder;
 import com.example.ibra.oxp.utils.SharedPref;
 
 import org.json.JSONArray;
@@ -69,23 +70,26 @@ import butterknife.OnClick;
 public class AddProduct extends Base {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.add_prod_name) EditText name;
-    @BindView(R.id.add_prod_price) EditText price;
-    @BindView(R.id.add_prod_description) EditText description;
-    @BindView(R.id.add_prod_quantity) EditText quantity;
-    @BindView(R.id.add_prod_button) Button addProduct;
+    @BindView(R.id.add_product_name) EditText name;
+    @BindView(R.id.add_product_price) EditText price;
+    @BindView(R.id.add_product_description) EditText description;
+    @BindView(R.id.add_product_quantity) EditText quantity;
+    @BindView(R.id.add_product_button) Button addProduct;
     @BindView(R.id.add_product_image_name) TextView image_name;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
-    @BindView(R.id.add_prod_spinner) Spinner spinner;
+    @BindView(R.id.add_product_spinner) Spinner spinner;
     @BindView(R.id.toolbar_title) TextView toolbar_title;
-    RequestQueue requestQueue;
+    @BindView(R.id.add_product_image) ImageView image;
+    private RequestQueue requestQueue;
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
-    MyDatabaseHelper myDatabaseHelper;
-    String mCurrentPhotoPath;
-    String encodedImage="";
+    private MyDatabaseHelper myDatabaseHelper;
+    private String mCurrentPhotoPath;
+    private String encodedImage="";
     private List<String> itemsList;
     private ArrayAdapter<String> adapter;
-    String _category;
+    private String _category;
+
+    private DialogBuilder dialogBuilder;
 
 
 
@@ -97,13 +101,12 @@ public class AddProduct extends Base {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         bottom();
+        dialogBuilder = new DialogBuilder(this);
         requestQueue = Volley.newRequestQueue(this);
-
         //myDatabaseHelper = new MyDatabaseHelper(this);
         //myDatabaseHelper.Image();
         itemsList = new ArrayList<>();
         requestCategory();
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -120,7 +123,7 @@ public class AddProduct extends Base {
 
     }
 
-    @OnClick(R.id.add_prod_button)
+    @OnClick(R.id.add_product_button)
     public void btn_add_product() {
         String _name = name.getText().toString().trim();
         String _price = price.getText().toString().trim();
@@ -148,9 +151,11 @@ public class AddProduct extends Base {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            dialogBuilder.loadingDialog("Adding Product...");
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, product_url, jsonObject, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
+                    dialogBuilder.dismissDialog();
                     String status_code = "";
                     String string_response = "";
                     try {
@@ -163,6 +168,7 @@ public class AddProduct extends Base {
                         //myDatabaseHelper.InsertProduct(p);
                         Log.d("PRODUCT ADDED!", response.toString());
                         Toast.makeText(AddProduct.this, string_response, Toast.LENGTH_SHORT).show();
+                        goBack();
                     } else {
                         Log.d("PRODUCT NOT ADDED!", response.toString());
                         Toast.makeText(AddProduct.this, string_response, Toast.LENGTH_SHORT).show();
@@ -171,6 +177,7 @@ public class AddProduct extends Base {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    dialogBuilder.dismissDialog();
                     Log.d("ADD PRODUCT ERROR!", error.toString());
                     Toast.makeText(AddProduct.this, "PRODUCT VOLLEY ERROR OCCURED", Toast.LENGTH_SHORT).show();
                 }
@@ -283,6 +290,7 @@ public class AddProduct extends Base {
         }
         if (bitmap != null) {
             encodedImage = encodeImage(bitmap);
+            image.setImageBitmap(bitmap);
         }
     }
 
@@ -322,7 +330,8 @@ public class AddProduct extends Base {
         return image;
     }
 
-    private void dispatchTakePictureIntent() {
+    private void dispatchTakePictureIntent()
+    {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
@@ -419,5 +428,13 @@ public class AddProduct extends Base {
         super.onCreateOptionsMenu(menu);
         menu.findItem(R.id.search).setVisible(false);
         return true;
+    }
+
+
+    private void goBack()
+    {
+        Intent intent = new Intent(AddProduct.this,ViewMyProducts.class);
+        startActivity(intent);
+        finish();
     }
 }

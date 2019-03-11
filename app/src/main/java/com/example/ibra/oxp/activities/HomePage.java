@@ -58,7 +58,7 @@ public class HomePage extends Base {
                         case 0:
                             intent = new Intent(HomePage.this,Pro_service.class);
                             startActivity(intent);
-                            finish();
+                            //ofinish();
                             break;
                         case 1:
                             intent = new Intent(HomePage.this,ViewProducts.class);

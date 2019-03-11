@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -56,15 +57,10 @@ public class ViewMyProducts extends Base {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.signup);
-        //setContentView(R.layout.com.example.ibra.app1.Activity.awein);
         setContentView(R.layout.my_products);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         bottom();
-        //dbHelper = new MyDatabaseHelper(this);
-
-
         imagesURL = new HashMap<>();
         products = new ArrayList<>();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2,//span count no of items in single row
@@ -73,16 +69,6 @@ public class ViewMyProducts extends Base {
         //set layout manager as gridLayoutManager
         recyclerViewProducts.setLayoutManager(gridLayoutManager);
 
-        //Crete new EndlessScrollListener fo endless recyclerview loading
-       /* EndlessScrollListener endlessScrollListener = new EndlessScrollListener(gridLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                if (!productsAdapter.loading)
-                    feedData();
-            }
-        };*/
-
-        //to give loading item full single row
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -96,15 +82,10 @@ public class ViewMyProducts extends Base {
                 }
             }
         });
-        //add on on Scroll listener
-        //recyclerViewProducts.addOnScrollListener(endlessScrollListener);
-        //add space between cards
-        recyclerViewProducts.addItemDecoration(new Space(2, 20, true, 0));
-        //Finally set the adapter
 
-        //load first page of recyclerview
-        // endlessScrollListener.onLoadMore(0, 0);
+        recyclerViewProducts.addItemDecoration(new Space(2, 20, true, 0));
         feedData();
+        pullToRefresh();
     }
 
     private void feedData() {
@@ -114,7 +95,7 @@ public class ViewMyProducts extends Base {
         final String id = sharedPref.readValue("id", "0");
         final int _id = Integer.parseInt(id);
         Toast.makeText(ViewMyProducts.this,sharedPref.readValue("email", "xyx@gmail.com") , Toast.LENGTH_SHORT).show();
-        String completeURL = String.format("http://" + IP_PORT + "/oxp/product/?user_id=%1$s", _id);
+        String completeURL = String.format(product_url+"?user_id=%1$s", _id);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, completeURL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -175,6 +156,17 @@ public class ViewMyProducts extends Base {
         startActivity(intent);
         finish();
     }
-
+    private void pullToRefresh()
+    {
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                products.clear();
+                feedData(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+    }
 
 }

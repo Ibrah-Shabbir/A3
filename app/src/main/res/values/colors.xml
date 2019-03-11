@@ -10,4 +10,6 @@
     <color name="black_color">#000000</color>
     <color name="yellow_color">#ff6200</color>
     <color name="blue_color">#0059ff</color>
+    <color name="gray">#DADFE1</color>
+    <color name="dark_gray">#878a8b</color>
 </resources>

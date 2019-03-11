@@ -60,6 +60,8 @@ public class ProductDetail extends Base {
 
         SharedPref sharedPref;
         private MyProduct myProduct;
+        private MyProduct updatedProduct;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,7 @@ public class ProductDetail extends Base {
         bottom();
         sharedPref=new SharedPref(this);
         receiveData();
+        getSpecificProduct(myProduct.getId());
     }
 
     @Override
@@ -87,29 +90,86 @@ public class ProductDetail extends Base {
         }
         else if(item_id==R.id.dots_menu_delete)
         {
-            deleteProduct();
-            Intent intent = new Intent(ProductDetail.this,ViewMyProducts.class);
-            startActivity(intent);
-            finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(ProductDetail.this);
+            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void setViewData()
     {
-
         String contact_no=sharedPref.readValue("contact_no","No contact number to show");
 
-        name.setText(name.getText()+myProduct.getName());
-        description.setText(description.getText()+myProduct.getDescription());
-        quantity.setText(quantity.getText()+myProduct.getQuantity());
-        price.setText(price.getText()+myProduct.getPrice());
+        name.setText(name.getText()+updatedProduct.getName());
+        description.setText(description.getText()+updatedProduct.getDescription());
+        quantity.setText(quantity.getText()+updatedProduct.getQuantity());
+        price.setText(price.getText()+updatedProduct.getPrice());
         contactNumber.setText(contactNumber.getText()+contact_no);
 
         Glide.with(this)
                 .asBitmap()
-                .load(myProduct.getImage())
+                .load(updatedProduct.getImage())
                 .into(new BitmapImageViewTarget(image));
+
+    }
+
+
+    protected void getSpecificProduct(int product_id) {
+        updatedProduct=new MyProduct();
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        Toast.makeText(ProductDetail.this,Integer.toString(product_id), Toast.LENGTH_SHORT).show();
+        String completeURL = String.format(product_url+"?id=%1$s", product_id);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, completeURL, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {//run
+                    String status_code = response.getString("status_code");
+                    if (status_code.equals("200")) {
+                        JSONArray jsonArray = response.getJSONArray("data");
+                        int length = jsonArray.length();
+
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        int productID = Integer.parseInt(jsonObject.getString("ID"));
+                        String name = jsonObject.getString("name");
+                        String price = jsonObject.getString("price");
+                        String description = jsonObject.getString("description");
+                        String quantity = jsonObject.getString("quantity");
+                        String imagURL = jsonObject.getString("image_url");
+                        String category = jsonObject.getString("category");
+                        updatedProduct.setId(productID);
+                        updatedProduct.setName(name);
+                        updatedProduct.setPrice(price);
+                        updatedProduct.setDescription(description);
+                        updatedProduct.setQuantity(quantity);
+                        updatedProduct.setImage(imagURL);
+                        updatedProduct.setCategory(category);
+                        setViewData();
+
+                    } else {
+                        String string_response = response.getString("data");
+                        Log.d("Error in Base", string_response);
+                        Toast.makeText(ProductDetail.this, string_response, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d("Error in Base",e.toString());
+                    Toast.makeText(ProductDetail.this, e.toString(), Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("ERROR BASE VOLLEY!", error.toString());
+                Toast.makeText(ProductDetail.this, "BASE VOLLEY ERROR OCCURED", Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+
 
     }
 
@@ -117,7 +177,7 @@ public class ProductDetail extends Base {
     {
         myProduct=(MyProduct)getIntent().getSerializableExtra("Product");
         Toast.makeText(ProductDetail.this, myProduct.getName()+" "+myProduct.getPrice()+" "+myProduct.getDescription(), Toast.LENGTH_SHORT).show();
-        setViewData();
+        //setViewData();
     }
 
     private void  deleteProduct()
@@ -173,5 +233,42 @@ public class ProductDetail extends Base {
         intent.putExtra("Product", myProduct);
         startActivity(intent);
         finish();
+    }
+
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    //Yes button clicked
+                    deleteProduct();
+                    Intent intent = new Intent(ProductDetail.this,ViewMyProducts.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    //No button clicked
+                    dialog.dismiss();
+                    break;
+            }
+        }
+    };
+    private void ConfirmationMessage() {
+        final CharSequence[] items = {"Yes","No"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProductDetail.this);
+        builder.setTitle("Want to delete it?");
+
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (items[which].equals("Camera")) {
+
+                } else if (items[which].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
     }
 }

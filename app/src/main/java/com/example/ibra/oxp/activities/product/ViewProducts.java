@@ -3,6 +3,7 @@ package com.example.ibra.oxp.activities.product;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -105,7 +106,9 @@ public class ViewProducts extends Base {
         //recyclerViewProducts.setAdapter(productsAdapter);
         //load first page of recyclerview
         //endlessScrollListener.onLoadMore(0, 0);
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         feedData();
+        pullToRefresh();
     }
 
 
@@ -175,6 +178,18 @@ public class ViewProducts extends Base {
         productsAdapter.notifyDataSetChanged();
     }
 
+    private void pullToRefresh()
+    {
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                products.clear();
+                feedData(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+    }
 }
 
 

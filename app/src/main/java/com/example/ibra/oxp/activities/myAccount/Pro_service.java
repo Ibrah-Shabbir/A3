@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.example.ibra.oxp.R;
 import com.example.ibra.oxp.activities.Base;
@@ -16,19 +17,23 @@ import butterknife.OnClick;
 public class Pro_service extends Base {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pro_service);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+       toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
+       toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               finish();
+           }
+       });
         bottom();
     }
 
-
-
-    /** Called when the user touches the button */
-    @OnClick(R.id.send_product)
+    @OnClick(R.id.layout_my_products)
     public void sendMessageProduct() {
         // Do something in response to button click
         Intent intent = new Intent(Pro_service.this, ViewMyProducts.class);
@@ -36,7 +41,7 @@ public class Pro_service extends Base {
         //finish();
     }
 
-    @OnClick(R.id.send_service)
+    @OnClick(R.id.layout_my_services)
     public void sendMessageService() {
         // Do something in response to button click
         Intent intent = new Intent(Pro_service.this, ViewMyServices.class);

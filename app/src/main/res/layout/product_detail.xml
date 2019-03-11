@@ -11,6 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="12dp"
         android:layout_below="@+id/toolbar2"
         android:layout_above="@id/navigation">
 
@@ -24,11 +25,12 @@
                     android:id="@+id/product_detail_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/prod"
-                    android:layout_marginTop="0dp"/>
+                    android:layout_marginTop="0dp"
+                    android:src="@drawable/no"
+                    android:background="@color/gray"/>
         </LinearLayout>
         <ScrollView
-            android:layout_margin="20dp"
+            android:padding="12dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <LinearLayout
