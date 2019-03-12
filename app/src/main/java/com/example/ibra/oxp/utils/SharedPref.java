@@ -51,4 +51,10 @@ public class SharedPref {
     public int readValue(String key, int defaultt){
         return sharedPrefObj.getInt(key, defaultt);
     }
+
+    public void deleteData()
+    {
+        editor.clear();
+        editor.commit();
+    }
 }

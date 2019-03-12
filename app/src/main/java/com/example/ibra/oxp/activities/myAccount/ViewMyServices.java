@@ -151,7 +151,7 @@ public class ViewMyServices extends Base {
 
     @OnClick(R.id.my_services_fab)
     public void my_services_fab() {
-        Toast.makeText(ViewMyServices.this, "SERVICEEEEE PLZ ADD HOJAO", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ViewMyServices.this, "SERVICEEEEE PLZ ADD HOJAO", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ViewMyServices.this, AddService.class);
         startActivity(intent);
         finish();
