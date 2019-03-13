@@ -30,7 +30,7 @@ import org.json.JSONObject;
 public class Base extends AppCompatActivity
 {
 
-    protected static final String IP_PORT="192.168.8.101:8000";
+    protected static final String IP_PORT="192.168.8.100:8000";
     //protected static final String IP_PORT="192.168.8.102:8000";
     //protected static final String IP_PORT="192.168.8.100:8000";
     //protected static final String IP_PORT="192.168.43.10:8000";
