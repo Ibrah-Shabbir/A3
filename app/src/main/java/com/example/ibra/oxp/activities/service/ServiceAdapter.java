@@ -97,7 +97,7 @@ public class ServiceAdapter extends RecyclerView.Adapter {
 
         public ServiceHolder(View itemView) {
             super(itemView);
-            textViewServiceName = itemView.findViewById(R.id.textViewProductName);
+            textViewServiceName = itemView.findViewById(R.id.textViewServiceName);
         }
     }
     //holds view of loading item

@@ -108,13 +108,16 @@ public class ViewMyServices extends Base {
                         for (int i = length - 1; i >= 0; i--) //////newly added products will be shown first
                         {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            int serviceID = Integer.parseInt(jsonObject.getString("ID"));
+                            int serviceID = Integer.parseInt(jsonObject.getString("id"));
                             String name = jsonObject.getString("name");
                             String description = jsonObject.getString("description");
                             MyService service_obj = new MyService(serviceID, name, description);
                             services.add(service_obj);
                         }
+                        Toast.makeText(ViewMyServices.this, "before adapter", Toast.LENGTH_SHORT).show();
+                        //setDataInAdapter();
                         setDataInAdapter();
+                        Toast.makeText(ViewMyServices.this, "after adapter", Toast.LENGTH_SHORT).show();
                     } else {
                         String string_response = response.getString("data");
                         Log.d("ERROR SHOWING SERVICES!", string_response);
@@ -122,6 +125,8 @@ public class ViewMyServices extends Base {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(ViewMyServices.this, "in catch "+e.toString(), Toast.LENGTH_SHORT).show();
+
                 }
 
             }

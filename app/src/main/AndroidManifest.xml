@@ -55,12 +55,18 @@
             android:name=".activities.product.ViewProducts"
             android:parentActivityName=".activities.Login"></activity>
         <activity
+            android:name=".activities.service.ViewServices"
+            android:parentActivityName=".activities.Login"></activity>
+        <activity
             android:name=".activities.product.AddProduct"
             android:parentActivityName=".activities.AssistProduct"></activity>
 
         <activity
             android:name=".activities.product.EditProduct"
             android:parentActivityName=".activities.product.ProductDetail"></activity>
+        <activity
+            android:name=".activities.service.EditService"
+            android:parentActivityName=".activities.service.ServiceDetail"></activity>
         <activity
 
             android:name=".activities.myAccount.ViewMyProducts"
@@ -78,8 +84,7 @@
             android:name=".activities.service.AddService"
             android:parentActivityName=".activities.AssistProduct"></activity>
         <activity android:name=".activities.service.ServiceDetail"></activity>
-        <activity android:name=".activities.settings.Settings"></activity>
-        <activity android:name=".activities.settings.UpdateProfile"></activity>
+
 
 
     </application>
