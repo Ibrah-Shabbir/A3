@@ -25,7 +25,7 @@ public class ServiceAdapter extends RecyclerView.Adapter {
     List<MyService> myServices;
     Context mContext;
     public static final int LOADING_ITEM = 0;
-    public static final int PRODUCT_ITEM = 1;
+    public static final int SERVICE_ITEM = 1;
     int LoadingItemPos;
     public boolean loading = false;
 
@@ -40,7 +40,7 @@ public class ServiceAdapter extends RecyclerView.Adapter {
         if (currentProduct.isLoading()) {
             return LOADING_ITEM;
         } else {
-            return PRODUCT_ITEM;
+            return SERVICE_ITEM;
         }
     }
 
@@ -51,7 +51,7 @@ public class ServiceAdapter extends RecyclerView.Adapter {
         if (viewType == LOADING_ITEM) {
             View row = inflater.inflate(R.layout.custom_row_loading, parent, false);
             return new LoadingHolder(row);
-        } else if (viewType == PRODUCT_ITEM) {
+        } else if (viewType == SERVICE_ITEM) {
             View row = inflater.inflate(R.layout.custom_row_service, parent, false);
             return new ServiceHolder(row);
         }
@@ -75,7 +75,7 @@ public class ServiceAdapter extends RecyclerView.Adapter {
                     Intent intent = new Intent(mContext,ServiceDetail.class);
                     //Bundle bundle=new Bundle();
                     //bundle.put;
-                    intent.putExtra("Product", currentService);
+                    intent.putExtra("Service", currentService);
                     mContext.startActivity(intent);
 
                 }
@@ -97,7 +97,7 @@ public class ServiceAdapter extends RecyclerView.Adapter {
 
         public ServiceHolder(View itemView) {
             super(itemView);
-            textViewServiceName = itemView.findViewById(R.id.textViewProductName);
+            textViewServiceName = itemView.findViewById(R.id.textViewServiceName);
         }
     }
     //holds view of loading item

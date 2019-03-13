@@ -15,6 +15,7 @@ import com.example.ibra.oxp.activities.myAccount.Pro_service;
 import com.example.ibra.oxp.activities.myAccount.ViewMyProducts;
 import com.example.ibra.oxp.activities.product.AddProduct;
 import com.example.ibra.oxp.activities.product.ViewProducts;
+import com.example.ibra.oxp.activities.service.ViewServices;
 import com.example.ibra.oxp.database.MyDatabase;
 
 import butterknife.BindView;
@@ -71,7 +72,7 @@ public class HomePage extends Base {
                             finish();
                             break;
                         case 3:
-                            intent = new Intent(HomePage.this,HomePage.class);
+                            intent = new Intent(HomePage.this,ViewServices.class);
                             startActivity(intent);
                             finish();
                             break;

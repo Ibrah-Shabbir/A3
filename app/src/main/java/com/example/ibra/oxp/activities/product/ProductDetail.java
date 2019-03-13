@@ -29,7 +29,7 @@ import com.example.ibra.oxp.R;
 import com.example.ibra.oxp.activities.Base;
 import com.example.ibra.oxp.activities.myAccount.ViewMyProducts;
 import com.example.ibra.oxp.models.MyProduct;
-import com.example.ibra.oxp.models.Product;
+import com.example.ibra.oxp.models.MyProduct;
 import com.example.ibra.oxp.utils.SharedPref;
 
 import org.json.JSONArray;
