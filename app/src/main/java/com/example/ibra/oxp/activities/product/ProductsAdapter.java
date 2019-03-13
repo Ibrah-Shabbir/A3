@@ -21,7 +21,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.ibra.oxp.activities.DiscussionForum;
 import com.example.ibra.oxp.activities.HomePage;
 import com.example.ibra.oxp.models.MyProduct;
-import com.example.ibra.oxp.models.Product;
+import com.example.ibra.oxp.models.MyProduct;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;

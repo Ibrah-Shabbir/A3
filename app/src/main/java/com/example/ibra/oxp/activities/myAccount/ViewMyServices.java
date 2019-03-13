@@ -2,6 +2,7 @@ package com.example.ibra.oxp.activities.myAccount;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,7 @@ import com.example.ibra.oxp.activities.Base;
 import com.example.ibra.oxp.activities.product.ProductsAdapter;
 import com.example.ibra.oxp.activities.service.AddService;
 import com.example.ibra.oxp.activities.service.ServiceAdapter;
+import com.example.ibra.oxp.database.MyDatabaseHelper;
 import com.example.ibra.oxp.models.MyProduct;
 import com.example.ibra.oxp.models.MyService;
 import com.example.ibra.oxp.utils.SharedPref;
@@ -39,6 +41,7 @@ import butterknife.OnClick;
 public class ViewMyServices extends Base {
 
     ServiceAdapter serviceAdapter;
+    MyDatabaseHelper dbHelper;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.recyclerview_service)
@@ -61,7 +64,7 @@ public class ViewMyServices extends Base {
             @Override
             public int getSpanSize(int position) {
                 switch (serviceAdapter.getItemViewType(position)) {
-                    case ServiceAdapter.PRODUCT_ITEM:
+                    case ServiceAdapter.SERVICE_ITEM:
                         return 1;
                     case ServiceAdapter.LOADING_ITEM:
                         return 2; //number of columns of the grid
@@ -79,6 +82,7 @@ public class ViewMyServices extends Base {
         //load first page of recyclerview
         // endlessScrollListener.onLoadMore(0, 0);
         feedData();
+        pullToRefresh();
     }
 
 
@@ -113,7 +117,7 @@ public class ViewMyServices extends Base {
                         setDataInAdapter();
                     } else {
                         String string_response = response.getString("data");
-                        Log.d("ERROR SHOWING PRODUCTS!", string_response);
+                        Log.d("ERROR SHOWING SERVICES!", string_response);
                         Toast.makeText(ViewMyServices.this, string_response, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
@@ -165,5 +169,19 @@ public class ViewMyServices extends Base {
         recyclerViewService.setAdapter(serviceAdapter);
         serviceAdapter.notifyDataSetChanged();
     }
+
+    private void pullToRefresh()
+    {
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                services.clear();
+                feedData(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+    }
+
 
 }
