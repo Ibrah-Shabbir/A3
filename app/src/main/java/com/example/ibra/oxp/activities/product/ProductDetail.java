@@ -56,7 +56,7 @@ public class ProductDetail extends Base {
         @BindView(R.id.product_detail_contactNumber)
         TextView contactNumber;
         @BindView(R.id.toolbar2)
-        Toolbar toolbar2;
+        Toolbar toolbar;
 
         SharedPref sharedPref;
         private MyProduct myProduct;
@@ -68,7 +68,14 @@ public class ProductDetail extends Base {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_detail);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar2);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         bottom();
         sharedPref=new SharedPref(this);
         receiveData();
@@ -240,7 +247,6 @@ public class ProductDetail extends Base {
         public void onClick(DialogInterface dialog, int which) {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
-                    //Yes button clicked
                     deleteProduct();
                     Intent intent = new Intent(ProductDetail.this,ViewMyProducts.class);
                     startActivity(intent);
@@ -248,27 +254,10 @@ public class ProductDetail extends Base {
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
-                    //No button clicked
                     dialog.dismiss();
                     break;
             }
         }
     };
-    private void ConfirmationMessage() {
-        final CharSequence[] items = {"Yes","No"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(ProductDetail.this);
-        builder.setTitle("Want to delete it?");
 
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (items[which].equals("Camera")) {
-
-                } else if (items[which].equals("Cancel")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
 }
