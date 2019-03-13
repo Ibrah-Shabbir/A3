@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/menu_bar" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar2"
+        android:layout_marginTop="18dp"
+        android:orientation="vertical">
+
+        <EditText
+                android:id="@+id/edit_service_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_product_heading"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="Name"
+                android:inputType="text"
+                android:textSize="16sp" />
+
+        <EditText
+                android:id="@+id/edit_service_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_product_name"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="Description"
+                android:inputType="text"
+                android:textSize="16sp" />
+        <Button
+                android:id="@+id/edit_service_button"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/action_bar_color"
+                android:text="UPDATE SERVICE"
+                android:textColor="@color/white_color"
+                android:textSize="16sp"
+                android:layout_margin="@dimen/margin_8"/>
+
+
+        </LinearLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/action_bar_color"
+        app:itemBackground="@color/action_bar_color"
+        android:foreground="?attr/selectableItemBackground"
+        app:itemIconTint="@color/white_color"
+        app:itemTextColor="@color/white_color"
+        app:menu="@menu/navigation"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
+
