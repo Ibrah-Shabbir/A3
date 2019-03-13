@@ -75,7 +75,7 @@ public class EditProduct extends Base
     @BindView(R.id.edit_product_description)
     TextView description;
     @BindView(R.id.toolbar2)
-    Toolbar toolbar2;
+    Toolbar toolbar;
     @BindView(R.id.edit_product_image_name)
     TextView image_name;
     RequestQueue requestQueue;
@@ -97,7 +97,14 @@ public class EditProduct extends Base
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_product);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar2);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         bottom();
         dialogBuilder = new DialogBuilder(this);
         requestQueue = Volley.newRequestQueue(this);

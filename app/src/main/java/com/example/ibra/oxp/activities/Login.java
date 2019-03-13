@@ -116,9 +116,11 @@ public class Login extends Base {
                                         int id=jsonObject.getInt("id");
                                         String email=jsonObject.getString("email");
                                         String contact_no=jsonObject.getString("contact_no");
+                                        String city=jsonObject.getString("city");
+                                        String address=jsonObject.getString("address");
 
 
-                                    shared_pref(String.valueOf(id),email,f_name,l_name,contact_no);
+                                    shared_pref(String.valueOf(id),email,f_name,l_name,contact_no,city,address);
                                     Toast.makeText(Login.this, response.toString(), Toast.LENGTH_SHORT).show();
                                     Log.d("LOGIN SUCCESS! ", response.toString());
                                     Intent intent = new Intent(Login.this, HomePage.class);
@@ -151,14 +153,16 @@ public class Login extends Base {
 
     }
 
-    private void shared_pref(String id,String email,String first_name,String sur_name,String contact_no)
+    private void shared_pref(String id,String email,String first_name,String sur_name,String contact_no,String city,String address)
     {
         SharedPref sharedPref = new SharedPref(this);
 
         sharedPref.writeValue("id", id);
         sharedPref.writeValue("email", email);
-        sharedPref.writeValue("first_name", first_name);
-        sharedPref.writeValue("sur_name", sur_name);
+        sharedPref.writeValue("f_name", first_name);
+        sharedPref.writeValue("l_name", sur_name);
         sharedPref.writeValue("contact_no", contact_no);
+        sharedPref.writeValue("city", city);
+        sharedPref.writeValue("address", address);
     }
 }

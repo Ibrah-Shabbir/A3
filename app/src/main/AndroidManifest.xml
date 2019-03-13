@@ -78,8 +78,8 @@
             android:name=".activities.service.AddService"
             android:parentActivityName=".activities.AssistProduct"></activity>
         <activity android:name=".activities.service.ServiceDetail"></activity>
-
-
+        <activity android:name=".activities.settings.Settings"></activity>
+        <activity android:name=".activities.settings.UpdateProfile"></activity>
 
 
     </application>

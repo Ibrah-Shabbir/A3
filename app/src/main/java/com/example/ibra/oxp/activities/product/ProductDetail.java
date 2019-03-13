@@ -56,7 +56,7 @@ public class ProductDetail extends Base {
         @BindView(R.id.product_detail_contactNumber)
         TextView contactNumber;
         @BindView(R.id.toolbar2)
-        Toolbar toolbar2;
+        Toolbar toolbar;
 
         SharedPref sharedPref;
         private MyProduct myProduct;
@@ -68,7 +68,14 @@ public class ProductDetail extends Base {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_detail);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar2);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         bottom();
         sharedPref=new SharedPref(this);
         receiveData();
