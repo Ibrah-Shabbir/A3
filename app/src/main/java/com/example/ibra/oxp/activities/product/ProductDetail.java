@@ -146,6 +146,8 @@ public class ProductDetail extends Base {
                         String quantity = jsonObject.getString("quantity");
                         String imagURL = jsonObject.getString("image_url");
                         String category = jsonObject.getString("category");
+                       // String phoneNo = jsonObject.getString("category");
+
                         updatedProduct.setId(productID);
                         updatedProduct.setName(name);
                         updatedProduct.setPrice(price);
