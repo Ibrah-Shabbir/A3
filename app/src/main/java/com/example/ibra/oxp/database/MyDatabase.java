@@ -3,16 +3,15 @@ package com.example.ibra.oxp.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 public class MyDatabase extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "OXP_DATABASE.db";    // Database Name
     public static final String TABLE_USER = "User";          //Table Name
     public static final String TABLE_PRODUCT = "Product";// Table Name
-    public static final String TABLE_SERVICE = "Service";
     public static final String TABLE_IMAGE = "Image";// Table Name
+    public static final String TABLE_POST = "Post";
+    public static final String TABLE_COMMENT = "Comment";
     private static final int DATABASE_Version = 1;
 
     ///////////USER///////////////////////
@@ -44,12 +43,19 @@ public class MyDatabase extends SQLiteOpenHelper {
     public static final String IMAGE_NAME ="name";
     public static final String IMAGE_IMAGE = "image";
 
-    /////////////SERVICE/////////////////////////
-    public static final String SERVICE_ID = "id";
-    public static final String SERVICE_NAME = "name";
-    public static final String SERVICE_DESCRIPTION = "description";
-    public static final String SERVICE_FK_EMAIL = "user_email";
+   ////////////////POST////////////////////
+    public static final String POST_ID = "id";
+    public static final String POST_FK_EMAIL = "user_email";
+    public static final String POST_NAME = "name";
+    public static final String POST_LIKES = "likes";
+    public static final String POST_DESCRIPTION = "description";
 
+    ////////////////COMMENT////////////////////
+    public static final String COMMENT_ID = "id";
+    public static final String COMMENT_FK_EMAIL = "user_email";
+    public static final String COMMENT_FK_POST = "post_name";
+    public static final String COMMENT_NAME = "name";
+    public static final String COMMENT_DESCRIPTION = "description";
 
     ////////CREATE TABLE OF USER ///////////////
 
@@ -79,16 +85,26 @@ public class MyDatabase extends SQLiteOpenHelper {
             + PRODUCT_IMAGE+" TEXT,"
             + "FOREIGN KEY ("+PRODUCT_FK_EMAIL+") REFERENCES "+TABLE_USER+" ("+USER_ID+") );";
 
-    /////////////CREATE TABLE OF SERVICE//////////////////
-
-
-    private static final String CREATE_SERVICE_TABLE= "CREATE TABLE "
-            + TABLE_SERVICE + "(" + SERVICE_ID
+    /////////////CREATE TABLE OF POST//////////////////
+    private static final String CREATE_POST_TABLE= "CREATE TABLE "
+            + TABLE_POST + "(" + POST_ID
             + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + SERVICE_FK_EMAIL+" TEXT,"
-            + SERVICE_NAME+" TEXT,"
-            + SERVICE_DESCRIPTION+" TEXT,"
-            + "FOREIGN KEY ("+SERVICE_FK_EMAIL+") REFERENCES "+TABLE_USER+" ("+USER_ID+") );";
+            + POST_FK_EMAIL+" TEXT,"
+            + POST_NAME+" TEXT,"
+            + POST_DESCRIPTION+" TEXT,"
+            + POST_LIKES+" INTEGER,"
+            + "FOREIGN KEY ("+POST_FK_EMAIL+") REFERENCES "+TABLE_USER+" ("+USER_ID+") );";
+
+    /////////////CREATE TABLE OF COMMENT//////////////////
+    private static final String CREATE_COMMENT_TABLE= "CREATE TABLE "
+            + TABLE_COMMENT + "(" + COMMENT_ID
+            + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COMMENT_FK_EMAIL+" TEXT,"
+            + COMMENT_NAME+" TEXT,"
+            + COMMENT_DESCRIPTION+" TEXT,"
+            + COMMENT_FK_POST+" TEXT,"
+            + "FOREIGN KEY ("+COMMENT_FK_POST+") REFERENCES "+TABLE_POST+" ("+POST_ID+") );";
+            //+ "FOREIGN KEY ("+COMMENT_FK_EMAIL+") REFERENCES "+TABLE_USER+" ("+USER_ID+") );";
 
     /////////////CREATE TABLE OF IMAGE//////////////////
     private static final String CREATE_IMAGE_TABLE= "CREATE TABLE "
@@ -102,7 +118,8 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     private static final String DROP_USER_TABLE ="DROP TABLE IF EXISTS "+TABLE_USER;
     private static final String DROP_PRODUCT_TABLE ="DROP TABLE IF EXISTS "+TABLE_PRODUCT;
-    private static final String DROP_SERVICE_TABLE ="DROP TABLE IF EXISTS "+TABLE_SERVICE;
+    private static final String DROP_POST_TABLE ="DROP TABLE IF EXISTS "+TABLE_POST;
+    private static final String DROP_COMMENT_TABLE ="DROP TABLE IF EXISTS "+TABLE_COMMENT;
     private static final String DROP_IMAGE_TABLE ="DROP TABLE IF EXISTS "+TABLE_IMAGE;
     private Context context;
 
@@ -118,7 +135,8 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_PRODUCT_TABLE);
-        db.execSQL(CREATE_SERVICE_TABLE);
+        db.execSQL(CREATE_POST_TABLE);
+        db.execSQL(CREATE_COMMENT_TABLE);
         //db.execSQL(CREATE_IMAGE_TABLE);
 
 
@@ -129,7 +147,8 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         db.execSQL(DROP_USER_TABLE);
         db.execSQL(DROP_PRODUCT_TABLE);
-        db.execSQL(DROP_SERVICE_TABLE);
+        db.execSQL(DROP_POST_TABLE);
+        db.execSQL(DROP_COMMENT_TABLE);
         //db.execSQL(DROP_IMAGE_TABLE);
         onCreate(db);
 
