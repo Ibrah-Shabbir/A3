@@ -58,6 +58,9 @@
             android:name=".activities.service.ViewServices"
             android:parentActivityName=".activities.Login"></activity>
         <activity
+            android:name=".activities.myAccount.ViewMyPosts"
+            android:parentActivityName=".activities.Login"></activity>
+        <activity
             android:name=".activities.product.AddProduct"
             android:parentActivityName=".activities.AssistProduct"></activity>
 
@@ -67,6 +70,9 @@
         <activity
             android:name=".activities.service.EditService"
             android:parentActivityName=".activities.service.ServiceDetail"></activity>
+        <activity
+            android:name=".activities.discussion.EditPost"
+            android:parentActivityName=".activities.discussion.PostDetail"></activity>
         <activity
 
             android:name=".activities.myAccount.ViewMyProducts"
@@ -80,6 +86,7 @@
         <activity
             android:name=".activities.product.ProductDetail"
             android:parentActivityName=".activities.product.ViewProducts"></activity>
+
         <activity
             android:name=".activities.discussion.AddPost"
             android:parentActivityName=".activities.DiscussionForum" />
@@ -90,6 +97,7 @@
             android:name=".activities.service.AddService"
             android:parentActivityName=".activities.AssistProduct"></activity>
         <activity android:name=".activities.service.ServiceDetail"></activity>
+        <activity android:name=".activities.discussion.PostDetail"></activity>
 
 
 

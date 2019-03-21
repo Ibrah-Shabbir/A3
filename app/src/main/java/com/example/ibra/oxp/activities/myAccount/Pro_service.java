@@ -55,6 +55,14 @@ public class Pro_service extends Base {
         //finish();
     }
 
+    @OnClick(R.id.pro_service_posts)
+    public void sendMessagePost() {
+        // Do something in response to button click
+        Intent intent = new Intent(Pro_service.this, ViewMyPosts.class);
+        startActivity(intent);
+        //finish();
+    }
+
 
 /*    private void ConfirmationMessage() {
         final CharSequence[] items = {"Log out","Cancel"};

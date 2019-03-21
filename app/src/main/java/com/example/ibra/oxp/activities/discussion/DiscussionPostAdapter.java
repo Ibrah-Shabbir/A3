@@ -130,8 +130,8 @@ public class DiscussionPostAdapter extends RecyclerView.Adapter {
 
         public PostHolder(View itemView) {
             super(itemView);
-            textViewAuthor = itemView.findViewById(R.id.textViewAuthor);
-            textViewPost = itemView.findViewById(R.id.textViewPost);
+            textViewAuthor = itemView.findViewById(R.id.textViewAuthorName);
+            textViewPost = itemView.findViewById(R.id.textViewPostName);
             menuView = itemView.findViewById(R.id.menuView);
             like = itemView.findViewById(R.id.like);
             comment = itemView.findViewById(R.id.comment);

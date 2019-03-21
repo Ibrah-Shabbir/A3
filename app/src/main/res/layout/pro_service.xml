@@ -65,6 +65,37 @@
                 android:textColor="@color/white_color"
                 android:textSize="18sp" />
 
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight=".1"
+                app:srcCompat="@drawable/ic_arrow_next" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pro_service_posts"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/margin_8"
+            android:background="@color/dark_gray"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/pro_service_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight=".9"
+                android:gravity="center_vertical"
+                android:paddingLeft="4dp"
+                android:text="My Posts"
+                android:textColor="@color/white_color"
+                android:textSize="18sp" />
+
+
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

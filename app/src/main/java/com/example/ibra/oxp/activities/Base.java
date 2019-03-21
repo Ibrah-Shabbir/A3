@@ -30,7 +30,7 @@ import org.json.JSONObject;
 public class Base extends AppCompatActivity
 {
 
-    protected static final String IP_PORT="192.168.8.100:8000";
+    protected static final String IP_PORT="192.168.43.10:8000";
     //protected static final String IP_PORT="192.168.8.102:8000";
     //protected static final String IP_PORT="192.168.8.100:8000";
     //protected static final String IP_PORT="192.168.43.10:8000";
@@ -40,6 +40,7 @@ public class Base extends AppCompatActivity
     protected static final String product_url="http://"+IP_PORT+"/oxp/product/";
     protected static final String category_url="http://"+IP_PORT+"/oxp/category/";
     protected static final String service_url="http://"+IP_PORT+"/oxp/service/";
+    protected static final String post_url="http://"+IP_PORT+"/oxp/post/";
 
 
 

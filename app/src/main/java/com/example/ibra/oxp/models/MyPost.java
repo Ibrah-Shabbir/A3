@@ -20,6 +20,17 @@ public class MyPost implements Serializable {
         this.Name = name;
         this.Description = description;
     }
+    public MyPost(String name, String description,int likes) {
+        this.Name = name;
+        this.Description = description;
+        this.Likes=likes;
+    }
+    public MyPost(int id, String name, String description) {
+        this.Id = id;
+        this.Name = name;
+        this.Description = description;
+
+    }
     public MyPost(int id, String name, String description, int likes) {
         this.Id = id;
         this.Name = name;
@@ -48,6 +59,9 @@ public class MyPost implements Serializable {
 
     public String getDescription() {
         return Description;
+    }
+    public Integer getLikes() {
+        return Likes;
     }
 
     public void setDescription(String description) {
