@@ -91,6 +91,9 @@
             android:name=".activities.discussion.AddPost"
             android:parentActivityName=".activities.DiscussionForum" />
         <activity
+            android:name=".activities.discussion.AddComment"
+            android:parentActivityName=".activities.DiscussionForum" />
+        <activity
             android:name=".activities.discussion.CommentActivity"
             android:parentActivityName=".activities.DiscussionForum"/>
         <activity

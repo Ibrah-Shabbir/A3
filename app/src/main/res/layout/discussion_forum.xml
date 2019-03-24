@@ -17,18 +17,19 @@
         android:text="What's on your mind?" />
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refresh_post"
+        android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/post_btn"
         android:layout_above="@+id/navigation">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/discussion_posts"
+            android:id="@+id/recyclerview_post"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white_color"
             android:padding="8dp" />
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <include layout="@layout/footer"/>

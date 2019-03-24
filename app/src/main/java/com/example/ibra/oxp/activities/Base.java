@@ -41,6 +41,7 @@ public class Base extends AppCompatActivity
     protected static final String category_url="http://"+IP_PORT+"/oxp/category/";
     protected static final String service_url="http://"+IP_PORT+"/oxp/service/";
     protected static final String post_url="http://"+IP_PORT+"/oxp/post/";
+    protected static final String comment_url="http://"+IP_PORT+"/oxp/comment/";
 
 
 
